@@ -1,150 +1,114 @@
-<h1 align="center">
-  <br />
-  <img
-    src="./_docs/assets/icon.png"
-    alt="Mega Man Robots API"
-    width="150"
-  />
-  <br />
-  <b>Mega Man Robots API</b>
-  <br />
-  <sub
-    ><sup><b>(MEGA-MAN-ROBOTS)</b></sup></sub
-  >
-  <br />
-  <a
-    href="https://github.com/felipeAguiarCode/MegaApiDotnetCore/actions/workflows/build.yml"
-  >
-    <img
-      src="https://github.com/felipeAguiarCode/MegaApiDotnetCore/actions/workflows/build.yml/badge.svg"
-      alt=""
-    />
-  </a>
-  <a href="https://github.com/felipeAguiarCode/MegaApiDotnetCore/releases/latest">
-    <img
-      src="https://img.shields.io/github/v/release/felipeAguiarCode/MegaApiDotnetCore"
-      alt="Latest Release"
-    />
-  </a>
-</h1>
+# MegaMan API Documentation
 
-<p align="center">
-  This .NET Core API is designed to serve JSON formatted data about bosses from
-  the Mega Man series. It is a backend service built with .NET Core 3.1 and
-  various modern dependencies for data management and API response handling.
-  <br />
-</p>
+## Contexto
+Este projeto é uma API feita em .NET Core para listar os dados dos bosses de MegaMan. O objetivo principal é ser um backend que fornece JSONs no formato abaixo:
 
-<p align="center">
-  Developed with Entity Framework Core and other modern .NET technologies, this
-  project aims to provide a robust API for accessing Mega Man robot data.
-  <br />
-</p>
-
-<p align="center">
-  <br />
-  <img src="./_docs/assets/carbon.png" />
-</p>
-
-## API Endpoints
-
-<table align="center">
-  <tr>
-    <th>Method</th>
-    <th>Endpoint</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td>GET</td>
-    <td>/api/v1/robots</td>
-    <td>Returns a list of all robots</td>
-  </tr>
-  <tr>
-    <td>GET</td>
-    <td>/api/v1/robots/{id}</td>
-    <td>Returns details of a specific robot by ID</td>
-  </tr>
-  <tr>
-    <td>POST</td>
-    <td>/api/v1/robots</td>
-    <td>Endpoint to create a new robot entry</td>
-  </tr>
-</table>
-
-## Techniques Used
-
-<p align="center">
-  - <b>Entity Framework Core:</b> ORM for data management.<br />
-  - <b>RESTful API Design:</b> Ensures clear and effective communication
-  endpoints.<br />
-  - <b>Dependency Injection:</b> Used throughout to promote loose coupling and
-  enhanced testability.<br />
-</p>
-
-## Dependencies
-
-<table align="center">
-  <tr>
-    <th>Package</th>
-    <th>Version</th>
-    <th>Link</th>
-  </tr>
-  <tr>
-    <td>Microsoft.EntityFrameworkCore</td>
-    <td>3.1.8</td>
-    <td>
-      <a
-        href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.1.8"
-        >NuGet</a
-      >
-    </td>
-  </tr>
-  <tr>
-    <td>Microsoft.EntityFrameworkCore.Design</td>
-    <td>3.1.8</td>
-    <td>
-      <a
-        href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/3.1.8"
-        >NuGet</a
-      >
-    </td>
-  </tr>
-  <tr>
-    <td>Microsoft.EntityFrameworkCore.SqlServer</td>
-    <td>3.1.8</td>
-    <td>
-      <a
-        href="https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/3.1.8"
-        >NuGet</a
-      >
-    </td>
-  </tr>
-  <tr>
-    <td>Newtonsoft.Json</td>
-    <td>12.0.2</td>
-    <td>
-      <a href="https://www.nuget.org/packages/Newtonsoft.Json/12.0.2">NuGet</a>
-    </td>
-  </tr>
-</table>
-
-## :gear: Arch
-
-```🌐
-src
-├── 📂 Controllers      [Routes for endpoints]
-├── 📂 Models           [Database models]
-├── 📂 Services         [Business rules]
-├── 📂 Middlewares      [Intermediate functions between the HTTP request and the final server response]
-├── 📂 Database         [Structures related to the database]
-│   ├── 📂 DTOs             [Input Models and View Models (Data Transfer Objects)]
-│   ├── 📂 EntityFramework  [Files related to the ORM Entity Framework]
-│   │     ├── 📂 Context         [Entity context settings]
-│   │     ├── 📂 Migrations      [Migrations for database updates]
-│   ├── 📂 Repositories     [Repository pattern]
+```json
+{
+  "Id": 1,
+  "Code": "DLN/DRN-003",
+  "Name": "Cutman",
+  "HP": 150,
+  "Picture": "https://vignette.wikia.nocookie.net/megaman/images/2/22/Cutman.png"
+}
 ```
 
-## License This software is licensed under the terms of the [MIT]
+## Especificações do Projeto
 
-⌨️ FelipeAguiar -
-[Github](https://github.com/felipeAguiarCode)
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+</Project>
+```
+
+## Dependências
+
+| Dependência | Descrição |
+|-------------|-----------|
+| [Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.1.8) | ORM para .NET Core (veja [artigo](https://docs.microsoft.com/en-us/ef/core/)) |
+| [Microsoft.EntityFrameworkCore.Design](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/3.1.8) | Ferramentas de design para Entity Framework Core (veja [artigo](https://docs.microsoft.com/en-us/ef/core/cli/dotnet)) |
+| [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/3.1.8) | Provedor de banco de dados SQL Server para Entity Framework Core (veja [artigo](https://docs.microsoft.com/en-us/ef/core/providers/sql-server/)) |
+| [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/12.0.2) | Biblioteca para trabalhar com JSON em .NET (veja [artigo](https://www.newtonsoft.com/json/help/html/Introduction.htm)) |
+
+## Endpoints do Projeto
+
+```csharp
+namespace Megaman.Controllers
+{
+    [ApiController]
+    [Route("api/v1/robots")]
+    public class RobotsController : ControllerBase
+    {
+        private readonly IRobotServices _services;
+        public RobotsController(IRobotServices services)
+        {
+           _services = services;
+        }
+
+        [HttpGet]
+        public ActionResult<IEnumerable<RobotReadDTO>> GetAllRobots()
+        {
+            var robotItems = _services.SearchAll();
+            return Ok(robotItems);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public object GetCommandById([FromRoute]int id)
+        {
+            var robot = _services.SearchById(id);
+
+            if(robot != null)
+                return Ok(robot);
+
+            return NotFound(new { message = "Nenhum robo encontrado" });
+        }
+
+        [HttpPost]
+        public ActionResult RobotSend(){
+            return Ok();
+        }
+    }
+}
+```
+
+## Estrutura do Projeto
+
+```plaintext
+.vs
+.vscode
+bin
+Controllers
+Database
+middlewares
+Models
+obj
+Properties
+Services
+appsettings.Development.json
+appsettings.json  
+global.json
+MegamanApi.csproj  
+MegamanApi.sln
+Program.cs
+Startup.cs
+```
+
+## Técnicas Utilizadas
+
+- **Entity Framework Core**: Utilizado como ORM para interagir com o banco de dados.
+- **Dependency Injection**: Injeção de dependências para gerenciar as dependências do projeto.
+- **ASP.NET Core**: Framework para construção de APIs web.
+- **Newtonsoft.Json**: Biblioteca para manipulação de JSON.
+
